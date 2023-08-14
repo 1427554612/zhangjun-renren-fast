@@ -15,7 +15,7 @@ module.exports = {
     proxyTable: devEnv.OPEN_PROXY === false ? {} : {
       '/proxyApi': {
         // target: 'http://demo.renren.io/renren-fast/',
-        target:'http://localhost:8080/renren-fast/',
+        target:'http://localhost:9000/renren-fast/',
         changeOrigin: true,
         pathRewrite: {
           '^/proxyApi': '/'
