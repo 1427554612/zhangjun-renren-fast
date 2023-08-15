@@ -1,12 +1,9 @@
 <template>
     <div>
         <el-tree
-            :data="data"
-            show-checkbox
-            node-key="id"
-            :default-expanded-keys="[2, 3]"
-            :default-checked-keys="[5]"
-            :props="defaultProps">
+            :data="menus"
+            :props="defaultProps"
+        >
         </el-tree>   
     </div>
 </template>
@@ -14,7 +11,19 @@
 export default {
     data(){
         return {
-            data:[]
+            menus:[{
+                name: '一级 1',
+                children: [{
+                        name: '二级 1-1',
+                        children: [{
+                        name: '三级 1-1-1'
+                    }]
+                }]}
+            ],
+            defaultProps:{
+                children:"children",
+                label:"name"
+            }
         }
     },
     created(){
@@ -26,6 +35,9 @@ export default {
             this.$http({
                 url: this.$http.adornUrl('/gulimallproduct/category/list/tree'),
                 method: 'get'
+            }).then(response=>{
+                console.log(response.data)
+                this.menus = response.data.data;
             })
         }
     }
